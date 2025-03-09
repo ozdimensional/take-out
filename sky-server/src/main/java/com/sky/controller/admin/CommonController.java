@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
+
 
 /*
  * 通用接口
@@ -31,12 +35,13 @@ public class CommonController {
         if (file.isEmpty()) {
             return Result.error("上传失败，请选择文件");
         }
-
         try {
             // 文件存储路径
-            String uploadDir = "E:\\takeout\\pic";
+            String uploadDir = "E:\\takeout\\front end\\nginx-1.20.2/html/sky/pic/";
+            String uploadDir2 = "E:\\takeout\\wxapp\\mp-weixin\\pages\\index\\img\\pic";
             // 创建目录（如果不存在）
             File directory = new File(uploadDir);
+
             if (!directory.exists()) {
                 directory.mkdirs();
             }
@@ -45,7 +50,13 @@ public class CommonController {
             String filePath = uploadDir + "/" + fileName;
             // 保存文件到本地
             file.transferTo(new File(filePath));
+            String targetFilePath = uploadDir2 + "/" + fileName;
+            Path source = Paths.get(filePath);
+            Path target = Paths.get(targetFilePath);
+            // 复制文件到指定目录
+            Files.copy(source, target);
             log.info("文件上传成功: {}", filePath);
+            filePath = "/pic/" + fileName;
             return Result.success(filePath);
         } catch (Exception e) {
             log.error("文件上传失败: {}", e.getMessage());
