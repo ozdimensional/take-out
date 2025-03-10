@@ -5,6 +5,7 @@ import com.sky.entity.Setmeal;
 import com.sky.result.Result;
 import com.sky.service.SetmealService;
 import com.sky.vo.DishItemVO;
+import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,12 @@ public class SetmealController {
         setmeal.setCategoryId(categoryId);
         setmeal.setStatus(StatusConstant.ENABLE);
 
+        
         List<Setmeal> list = setmealService.list(setmeal);
+        String img = "img";
+        for (Setmeal sm : list) {
+            sm.setImage(img + sm.getImage());
+        }
         return Result.success(list);
     }
 
@@ -48,6 +54,10 @@ public class SetmealController {
     @ApiOperation("根据套餐id查询包含的菜品列表")
     public Result<List<DishItemVO>> dishList(@PathVariable("id") Long id) {
         List<DishItemVO> list = setmealService.getDishItemById(id);
+        String img = "img";
+        for (DishItemVO dishVO : list) {
+            dishVO.setImage(img + dishVO.getImage());
+        }
         return Result.success(list);
     }
 }
