@@ -39,6 +39,9 @@ public class CommonController {
             // 文件存储路径
             String uploadDir = "E:\\takeout\\front end\\nginx-1.20.2/html/sky/pic/";
             String uploadDir2 = "E:\\takeout\\wxapp\\mp-weixin\\pages\\index\\img\\pic";
+            String uploadDir3 = "E:\\takeout\\wxapp\\mp-weixin\\pages\\order\\img\\pic";
+            String uploadDir4 = "E:\\takeout\\wxapp\\mp-weixin\\pages\\details\\img\\pic";
+            String uploadDir5 = "E:\\takeout\\wxapp\\mp-weixin\\pages\\historyOrder\\img\\pic";
             // 创建目录（如果不存在）
             File directory = new File(uploadDir);
 
@@ -54,6 +57,15 @@ public class CommonController {
             Path source = Paths.get(filePath);
             Path target = Paths.get(targetFilePath);
             // 复制文件到指定目录
+            Files.copy(source, target);
+            targetFilePath = uploadDir3 + "/" + fileName;
+            target = Paths.get(targetFilePath);
+            Files.copy(source, target);
+            targetFilePath = uploadDir4 + "/" + fileName;
+            target = Paths.get(targetFilePath);
+            Files.copy(source, target);
+            targetFilePath = uploadDir5 + "/" + fileName;
+            target = Paths.get(targetFilePath);
             Files.copy(source, target);
             log.info("文件上传成功: {}", filePath);
             filePath = "/pic/" + fileName;

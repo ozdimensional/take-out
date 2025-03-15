@@ -47,6 +47,14 @@ sky:
     user-ttl: 7200000
 
     user-token-name: authentication
+
+  shop:
+    address: 重庆邮电大学
+
+  baidu:
+    # 设置百度地图ak
+    ak: RK8vEFvYjKdqcKJ4cJ7SAyjVnmSFYCxl
+
   wechat:
     # 设置微信小程序appid
     appid: ${sky.wechat.appid}

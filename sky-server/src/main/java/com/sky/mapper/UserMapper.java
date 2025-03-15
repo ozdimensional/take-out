@@ -17,4 +17,6 @@ public interface UserMapper {
      * 插入用户信息
      */
     void insertUser(User user);
+
+    User getById(Long userId);
 }
